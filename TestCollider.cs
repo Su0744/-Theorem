@@ -12,14 +12,19 @@ public class TestCollider : MonoBehaviour
 
     void Update()
     {
-        Vector3 mousePos =  Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,Camera.main.nearClipPlane)); 
-        Vector3 dir = mousePos - Camera.main.transform.position; //¸¶¿ì½ºÀÇ Å¬¸¯ÇÑ À§Ä¡·Î °¡´Â ±æ
-        dir = dir.normalized; // 1·Î Á¤»óÈ­
-
-        RaycastHit hit; // ºÎµúÈù µ¥ÀÌÅÍ
-        if(Physics.Raycast(Camera.main.transform.position, dir, out hit)) // Ä«¸Ş¶ó¿Í ¿ÀºêÁ§Æ® À§Ä¡
+        if (Input.GetMouseButtonDown(0)) // ë§ˆìš°ìŠ¤ í´ë¦­(0 - ì™¼ìª½, 1 - ì˜¤ë¥¸ìª½, 2 - ê°€ìš´ëŒ€ íœ )
         {
-            Debug.Log($"Raycast Camera {hit.collider.gameObject.name}");
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+            Vector3 dir = mousePos - Camera.main.transform.position; //ë§ˆìš°ìŠ¤ì˜ í´ë¦­í•œ ìœ„ì¹˜ë¡œ ê°€ëŠ” ê¸¸
+            dir = dir.normalized; // 1ë¡œ ì •ìƒí™”
+
+            Debug.DrawRay(Camera.main.transform.position, dir, Color.red, 1.0f); // ë§ˆì§€ë§‰ì€ ìœ ì§€ì‹œê°„ì„ ì˜ë¯¸í•¨
+
+            RaycastHit hit; // ë¶€ë”ªíŒ ë°ì´í„°
+            if (Physics.Raycast(Camera.main.transform.position, dir, out hit)) // ì¹´ë©”ë¼ì™€ ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜
+            {
+                Debug.Log($"Raycast Camera {hit.collider.gameObject.name}");
+            }
         }
     }
 }
