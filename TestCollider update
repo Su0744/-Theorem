@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TestCollider : MonoBehaviour
+{
+
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 마우스의 좌표에 따라 값의 위치에서 광선을쏘는 코드(그걸 저장하는 ray함수)
+
+            Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f); // 마지막은 유지시간을 의미함
+
+            RaycastHit hit; // 부딪힌 데이터
+
+            if(Physics.Raycast(ray,out hit, 100.0f))
+            {
+                Debug.Log($"Raycast Camera {hit.collider.gameObject.name}");
+            }
+        }
+    }
+}
